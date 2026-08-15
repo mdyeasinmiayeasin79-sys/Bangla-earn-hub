@@ -1,1 +1,33 @@
+<script>
+function checkCaptcha(){
 
+    let captcha =
+        document.getElementById("captcha").innerText;
+
+    let answer =
+        document.getElementById("answer").value.trim();
+
+    let message =
+        document.getElementById("message");
+
+    if(answer.toUpperCase() === captcha.toUpperCase()){
+
+        message.style.color = "green";
+
+        message.innerHTML =
+        "সঠিক হয়েছে! CAPTCHA সম্পন্ন হয়েছে।<br>" +
+        "✅ Task Completed<br>" +
+        "💰 Demo Reward: 5 টাকা";
+
+        // নতুন CAPTCHA কাজের জন্য ইনপুট খালি করা
+        document.getElementById("answer").value = "";
+
+    }else{
+
+        message.style.color = "red";
+
+        message.innerText =
+        "CAPTCHA ভুল হয়েছে। আবার চেষ্টা করুন।";
+    }
+}
+</script>
