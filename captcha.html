@@ -1,1 +1,155 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Captcha Work - Bangla Earn Hub</title>
 
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f2f7ff;
+  color:#222;
+}
+
+header{
+  background:#0757c8;
+  color:white;
+  text-align:center;
+  padding:25px 15px;
+}
+
+.container{
+  max-width:500px;
+  margin:25px auto;
+  padding:15px;
+}
+
+.card{
+  background:white;
+  border-radius:15px;
+  padding:25px;
+  box-shadow:0 3px 12px rgba(0,0,0,.12);
+  text-align:center;
+}
+
+h2{
+  color:#0757c8;
+}
+
+.captcha-box{
+  margin:20px 0;
+  padding:20px;
+  background:#eef3f9;
+  border-radius:10px;
+  font-size:30px;
+  font-weight:bold;
+  letter-spacing:8px;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  font-size:18px;
+  border:1px solid #bbb;
+  border-radius:8px;
+  margin-bottom:12px;
+}
+
+button{
+  width:100%;
+  padding:13px;
+  background:#0757c8;
+  color:white;
+  border:0;
+  border-radius:8px;
+  font-size:17px;
+}
+
+button:hover{
+  background:#003f99;
+}
+
+#message{
+  margin-top:15px;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Bangla Earn Hub</h1>
+  <p>Captcha Work</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>ক্যাপচা সমাধান করুন</h2>
+
+    <p>নিচের কোডটি দেখে ঘরে লিখুন।</p>
+
+    <div class="captcha-box" id="captcha">
+      7K4P2
+    </div>
+
+    <input
+      type="text"
+      id="answer"
+      placeholder="ক্যাপচা কোড লিখুন"
+      autocomplete="off"
+    >
+
+    <button onclick="checkCaptcha()">
+      Submit
+    </button>
+
+    <div id="message"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+function checkCaptcha(){
+
+  let captcha =
+    document.getElementById("captcha").innerText;
+
+  let answer =
+    document.getElementById("answer").value.trim();
+
+  let message =
+    document.getElementById("message");
+
+  if(answer === captcha){
+
+    message.style.color = "green";
+
+    message.innerText =
+      "সঠিক হয়েছে! ক্যাপচা সম্পন্ন হয়েছে।";
+
+  }else{
+
+    message.style.color = "red";
+
+    message.innerText =
+      "ক্যাপচা ভুল হয়েছে। আবার চেষ্টা করুন।";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
