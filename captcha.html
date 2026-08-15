@@ -202,10 +202,19 @@ function checkCaptcha(){
         message.innerText =
         "❌ CAPTCHA ভুল হয়েছে। আবার চেষ্টা করুন।";
 
+   function nextTask(){
+
+    document.getElementById("message").style.color = "#1261c9";
+
+    document.getElementById("message").innerHTML =
+        "🎯 পরের Task শুরু হয়েছে!<br><br>" +
+        "📺 YouTube ভিডিও দেখার Task<br>" +
+        "ভিডিও সম্পূর্ণ দেখার পর কাজটি সম্পন্ন করুন।";
+
+    document.getElementById("nextButton").innerText =
+        "Task চলছে";
+
     }
-
-
- function nextTask(){
 
     let message = document.getElementById("message");
     let nextButton = document.getElementById("nextButton");
