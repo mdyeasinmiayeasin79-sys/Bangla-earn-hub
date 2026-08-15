@@ -203,11 +203,29 @@ function checkCaptcha(){
         "❌ CAPTCHA ভুল হয়েছে। আবার চেষ্টা করুন।";
 
     }
-}
 
-function nextTask(){
 
-    alert("পরের Task এখানে যুক্ত করা হবে।");
+ function nextTask(){
+
+    let message = document.getElementById("message");
+    let nextButton = document.getElementById("nextButton");
+
+    message.style.color = "#1261c9";
+
+    message.innerHTML =
+        "🎯 পরের Task<br><br>" +
+        "YouTube ভিডিও দেখুন<br>" +
+        "ভিডিওটি সম্পূর্ণ দেখার পর নিচের বাটনে ক্লিক করুন।";
+
+    nextButton.innerText = "YouTube Task শুরু করুন";
+
+    nextButton.onclick = function(){
+
+        alert("YouTube Task এখানে যুক্ত করা হবে।");
+
+    };
+
+ }
 
 }
 
