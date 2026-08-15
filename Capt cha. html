@@ -1,1 +1,220 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Captcha Work - Bangla Earn Hub</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f2f7ff;
+  color:#222;
+  line-height:1.6;
+}
+
+header{
+  background:#0757c8;
+  color:white;
+  text-align:center;
+  padding:25px 15px;
+}
+
+header h1{
+  font-size:28px;
+  margin-bottom:8px;
+}
+
+.container{
+  width:92%;
+  max-width:600px;
+  margin:auto;
+  padding:20px 0;
+}
+
+.card{
+  background:white;
+  border-radius:15px;
+  padding:25px;
+  margin-bottom:20px;
+  box-shadow:0 3px 12px rgba(0,0,0,.10);
+  text-align:center;
+}
+
+.card h2{
+  color:#0757c8;
+  margin-bottom:15px;
+}
+
+.info{
+  background:#e8f1ff;
+  border-left:5px solid #0757c8;
+  padding:15px;
+  border-radius:8px;
+  margin-bottom:20px;
+  text-align:left;
+}
+
+.captcha-box{
+  border:2px dashed #0757c8;
+  border-radius:12px;
+  padding:20px;
+  margin:20px 0;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  font-size:18px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  margin-top:10px;
+}
+
+.btn{
+  display:block;
+  width:100%;
+  background:#0757c8;
+  color:white;
+  text-decoration:none;
+  border:none;
+  padding:13px;
+  border-radius:8px;
+  margin-top:15px;
+  font-size:17px;
+  cursor:pointer;
+}
+
+.btn:hover{
+  background:#004aa8;
+}
+
+.back{
+  background:#555;
+}
+
+#message{
+  margin-top:15px;
+  font-weight:bold;
+}
+
+footer{
+  background:#0757c8;
+  color:white;
+  text-align:center;
+  padding:20px 15px;
+  margin-top:30px;
+}
+
+@media(max-width:500px){
+  header h1{
+    font-size:25px;
+  }
+
+  .container{
+    width:94%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Bangla Earn Hub</h1>
+  <p>Captcha Work</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Captcha Work</h2>
+
+    <div class="info">
+      <strong>কাজের নিয়ম:</strong><br>
+      নিচের Captcha দেখে সঠিক উত্তর লিখুন।
+      তারপর Submit চাপুন।
+    </div>
+
+    <p>
+      প্রতিটি কাজের পারিশ্রমিক ও নিয়ম
+      কাজ শুরু করার আগে দেখে নিন।
+    </p>
+
+    <div class="captcha-box">
+      <h3>Captcha</h3>
+
+      <p id="captchaText"
+         style="font-size:28px;
+                font-weight:bold;
+                letter-spacing:5px;
+                margin:15px 0;">
+        7K9P2
+      </p>
+
+      <input
+        type="text"
+        id="captchaInput"
+        placeholder="Captcha লিখুন"
+      >
+
+      <button class="btn" onclick="checkCaptcha()">
+        Submit
+      </button>
+
+      <div id="message"></div>
+    </div>
+
+    <a href="index.html" class="btn back">
+      ← Home Page
+    </a>
+
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Bangla Earn Hub</p>
+</footer>
+
+<script>
+
+function checkCaptcha(){
+
+  const correct =
+    document.getElementById("captchaText").innerText;
+
+  const answer =
+    document.getElementById("captchaInput").value.trim();
+
+  const message =
+    document.getElementById("message");
+
+  if(answer === correct){
+
+    message.innerText =
+      "সঠিক হয়েছে! কাজটি সফলভাবে সম্পন্ন হয়েছে।";
+
+    message.style.color = "green";
+
+  }else{
+
+    message.innerText =
+      "Captcha সঠিক নয়। আবার চেষ্টা করুন।";
+
+    message.style.color = "red";
+
+  }
+}
+
+</script>
+
+</body>
+</html>
