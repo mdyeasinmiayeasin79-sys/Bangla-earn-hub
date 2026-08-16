@@ -146,4 +146,55 @@ button:hover{
 </div>
 
 <script>
+let captchaCode = "";
+
+function generateCaptcha() {
+    const characters = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    captchaCode = "";
+
+    for (let i = 0; i < 5; i++) {
+        captchaCode += characters.charAt(
+            Math.floor(Math.random() * characters.length)
+        );
+    }
+
+    document.getElementById("captcha").innerText = captchaCode;
+}
+
+function checkCaptcha() {
+    let answer = document.getElementById("answer").value.trim().toUpperCase();
+    let message = document.getElementById("message");
+    let nextButton = document.getElementById("nextButton");
+
+    if (answer === captchaCode) {
+        message.style.color = "green";
+
+        message.innerHTML =
+            "✅ সঠিক হয়েছে!<br>" +
+            "🎉 CAPTCHA সম্পন্ন হয়েছে!<br>" +
+            "💰 Demo Reward: 5 টাকা";
+
+        nextButton.style.display = "block";
+        document.getElementById("answer").disabled = true;
+    } else {
+        message.style.color = "red";
+        message.innerText = "❌ CAPTCHA ভুল হয়েছে! আবার চেষ্টা করুন!";
+    }
+}
+
+function nextTask() {
+    document.getElementById("message").style.color = "#1261c9";
+
+    document.getElementById("message").innerHTML =
+        "🎯 পরের Task শুরু হয়েছে!<br><br>" +
+        "📺 YouTube ভিডিও দেখার Task<br>" +
+        "ভিডিও সম্পূর্ণ দেখার পর কাজটি সম্পন্ন করুন!";
+
+    document.getElementById("nextButton").innerText = "Task চলছে";
+
+    generateCaptcha();
+}
+
+generateCaptcha();    
 
