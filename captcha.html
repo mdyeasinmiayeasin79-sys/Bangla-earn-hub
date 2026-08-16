@@ -204,7 +204,8 @@ function nextTask() {
 
     document.getElementById("nextButton").innerText =
         "Task চলছে";
-
+document.getElementById("answer").value = "";
+document.getElementById("answer").disabled = false;
     generateCaptcha();
 }
 </script>
