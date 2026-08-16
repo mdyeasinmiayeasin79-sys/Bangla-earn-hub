@@ -492,7 +492,42 @@ newCaptcha();
 }
 </style>
 
+<script>
+function saveAccount() {
+  const name = document.getElementById("userName").value;
+  const bkash = document.getElementById("bkashNumber").value;
+  const nagad = document.getElementById("nagadNumber").value;
 
+  localStorage.setItem("userName", name);
+  localStorage.setItem("bkashNumber", bkash);
+  localStorage.setItem("nagadNumber", nagad);
+
+  document.getElementById("accountMessage").textContent =
+    "✅ Account information saved successfully.";
+}
+
+function withdrawMoney() {
+  const method = document.getElementById("withdrawMethod").value;
+  const amount = Number(
+    document.getElementById("withdrawAmount").value
+  );
+
+  if (!amount || amount <= 0) {
+    document.getElementById("withdrawMessage").textContent =
+      "⚠️ সঠিক টাকার পরিমাণ লিখুন।";
+    return;
+  }
+
+  if (amount < 100) {
+    document.getElementById("withdrawMessage").textContent =
+      "⚠️ সর্বনিম্ন ১০০ টাকা হলে উইথড্র করা যাবে।";
+    return;
+  }
+
+  document.getElementById("withdrawMessage").textContent =
+    "✅ " + method + " এর জন্য " + amount + " টাকার withdrawal request তৈরি হয়েছে।";
+}
+</script>
 </script>
 
 </body>
