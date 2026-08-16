@@ -492,34 +492,7 @@ newCaptcha();
 }
 </style>
 
-<script>
-function saveAccount() {
-  const name = document.getElementById("userName").value;
-  const bkash = document.getElementById("bkashNumber").value;
-  const nagad = document.getElementById("nagadNumber").value;
 
-  localStorage.setItem("userName", name);
-  localStorage.setItem("bkashNumber", bkash);
-  localStorage.setItem("nagadNumber", nagad);
-
-  document.getElementById("accountMessage").textContent =
-    "✅ Account information saved.";
-}
-
-function withdrawMoney() {
-  const method = document.getElementById("withdrawMethod").value;
-  const amount = document.getElementById("withdrawAmount").value;
-
-  if (!amount || amount <= 0) {
-    document.getElementById("withdrawMessage").textContent =
-      "⚠️ টাকার পরিমাণ লিখুন।";
-    return;
-  }
-
-  document.getElementById("withdrawMessage").textContent =
-    "✅ " + method + " withdrawal request: ৳" + amount;
-}
-</script>
 </script>
 
 </body>
