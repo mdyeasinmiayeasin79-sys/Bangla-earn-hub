@@ -395,7 +395,131 @@ function checkCaptcha(){
 }
 
 newCaptcha();
+<section class="card">
+  <h2>💰 কাজের রেট</h2>
 
+  <div class="rate-box">
+    <p>🧩 CAPTCHA Work — <b>৳1</b></p>
+    <p>▶️ YouTube Learning — <b>৳10</b></p>
+    <p>📘 Facebook Learning — <b>৳5</b></p>
+    <p>✈️ Telegram Learning — <b>৳5</b></p>
+  </div>
+</section>
+
+<section class="card">
+  <h2>👤 My Account</h2>
+
+  <input id="userName" type="text" placeholder="আপনার নাম">
+  <input id="bkashNumber" type="tel" placeholder="bKash নম্বর">
+  <input id="nagadNumber" type="tel" placeholder="Nagad নম্বর">
+
+  <button onclick="saveAccount()">💾 Account Save</button>
+
+  <p id="accountMessage"></p>
+</section>
+
+<section class="card">
+  <h2>📚 Learning</h2>
+
+  <div class="rate-box">
+    <h3>🧩 CAPTCHA Learning</h3>
+    <p>CAPTCHA দেখে সঠিক কোড লিখে Submit করতে হবে।</p>
+  </div>
+
+  <div class="rate-box">
+    <h3>▶️ YouTube Learning</h3>
+    <p>ভিডিওর নির্দেশনা দেখে কাজ সম্পন্ন করুন।</p>
+  </div>
+
+  <div class="rate-box">
+    <h3>📘 Facebook Learning</h3>
+    <p>Facebook কাজের নিয়ম আগে ভালোভাবে পড়ুন।</p>
+  </div>
+
+  <div class="rate-box">
+    <h3>✈️ Telegram Learning</h3>
+    <p>Telegram কাজের নিয়ম আগে ভালোভাবে পড়ুন।</p>
+  </div>
+</section>
+
+<section class="card">
+  <h2>💳 Withdrawal</h2>
+
+  <select id="withdrawMethod">
+    <option>bKash</option>
+    <option>Nagad</option>
+  </select>
+
+  <input id="withdrawAmount" type="number" placeholder="কত টাকা তুলবেন?">
+
+  <button onclick="withdrawMoney()">💸 Withdraw Request</button>
+
+  <p id="withdrawMessage"></p>
+</section>
+
+<style>
+.rate-box {
+  background:#f1f6ff;
+  padding:18px;
+  margin:12px 0;
+  border-radius:15px;
+}
+
+.rate-box p {
+  font-size:18px;
+}
+
+.card input,
+.card select {
+  width:100%;
+  padding:14px;
+  margin:7px 0;
+  border:2px solid #ddd;
+  border-radius:12px;
+  font-size:17px;
+  box-sizing:border-box;
+}
+
+.card button {
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:12px;
+  background:#1264c9;
+  color:white;
+  font-size:18px;
+  margin-top:8px;
+}
+</style>
+
+<script>
+function saveAccount() {
+  const name = document.getElementById("userName").value;
+  const bkash = document.getElementById("bkashNumber").value;
+  const nagad = document.getElementById("nagadNumber").value;
+
+  localStorage.setItem("userName", name);
+  localStorage.setItem("bkashNumber", bkash);
+  localStorage.setItem("nagadNumber", nagad);
+
+  document.getElementById("accountMessage").textContent =
+    "✅ Account information saved.";
+}
+
+function withdrawMoney() {
+  const method = document.getElementById("withdrawMethod").value;
+  const amount = document.getElementById("withdrawAmount").value;
+
+  if (!amount || amount <= 0) {
+    document.getElementById("withdrawMessage").textContent =
+      "⚠️ টাকার পরিমাণ লিখুন।";
+    return;
+  }
+
+  document.getElementById("withdrawMessage").textContent =
+    "✅ " + method + " withdrawal request: ৳" + amount;
+}
+</script>
 </script>
 
 </body>
