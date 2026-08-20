@@ -1,1 +1,294 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Bangla Earn Hub</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f6ff;
+    color: #222;
+}
+
+.header {
+    background: #0752a8;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.header p {
+    margin: 8px 0 0;
+    font-size: 18px;
+}
+
+.card {
+    width: 92%;
+    max-width: 600px;
+    margin: 25px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+}
+
+.card h2 {
+    text-align: center;
+    color: #0752a8;
+    margin-top: 0;
+}
+
+.card p {
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.captcha {
+    background: #eef3f8;
+    border: 2px dashed #0752a8;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+#captcha {
+    display: block;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 8px;
+    color: #0752a8;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    border: 0;
+    border-radius: 10px;
+    background: #0752a8;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+button:hover {
+    background: #063f82;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.next {
+    display: none;
+    margin-top: 20px;
+    background: #198754;
+}
+
+.next:hover {
+    background: #146c43;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: #555;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>Bangla Earn Hub</h1>
+    <p>CAPTCHA Work</p>
+</div>
+
+<div class="card">
+
+    <h2>CAPTCHA সম্পন্ন করুন</h2>
+
+    <p>
+        নিচের কোডটি দেখে একই কোডটি ঘরে লিখুন।
+    </p>
+
+    <div id="captcha" class="captcha-code"></div>
+
+    <input
+        type="text"
+        id="answer"
+        placeholder="ক্যাপচা কোড লিখুন"
+        autocomplete="off"
+        autocapitalize="characters"
+    >
+
+    <button type="button" onclick="checkCaptcha()">
+        Submit
+    </button>
+
+    <div id="message"></div>
+
+    <button
+        type="button"
+        id="nextButton"
+        class="next"
+        onclick="nextTask()">
+        পরের কাজ
+    </button>
+
+</div>
+
+<div class="footer">
+    © 2026 Bangla Earn Hub
+</div>
+
+<script>
+
+let captchaCode = "";
+
+function generateCaptcha() {
+
+    const characters =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    captchaCode = "";
+
+    for (let i = 0; i < 5; i++) {
+
+        captchaCode +=
+            characters.charAt(
+                Math.floor(
+                    Math.random() * characters.length
+                )
+            );
+
+    }
+
+    document.getElementById("captcha").innerText = captchaCode;
+}
+
+
+function checkCaptcha() {
+
+    const answer =
+        document.getElementById("answer")
+        .value
+        .trim()
+        .toUpperCase();
+
+    const message =
+        document.getElementById("message");
+
+    const nextButton =
+        document.getElementById("nextButton");
+
+
+    if (answer === "") {
+
+        message.style.color = "red";
+
+        message.innerHTML =
+            "❌ দয়া করে CAPTCHA কোড লিখুন।";
+
+        return;
+    }
+
+
+    if (answer === captchaCode) {
+
+        message.style.color = "green";
+
+        message.innerHTML =
+            "✅ CAPTCHA সঠিক হয়েছে!<br>" +
+            "কাজটি সফলভাবে সম্পন্ন হয়েছে।";
+
+        nextButton.style.display = "block";
+
+        document.getElementById("answer").disabled = true;
+
+    } else {
+
+        message.style.color = "red";
+
+        message.innerHTML =
+            "❌ CAPTCHA ভুল হয়েছে।<br>" +
+            "আবার চেষ্টা করুন।";
+
+        document.getElementById("answer").value = "";
+
+        generateCaptcha();
+    }
+
+}
+
+
+function nextTask() {
+
+    const message =
+        document.getElementById("message");
+
+    const nextButton =
+        document.getElementById("nextButton");
+
+    message.style.color = "#0752a8";
+
+    message.innerHTML =
+        "🎉 পরের কাজ শুরু হচ্ছে...";
+
+    nextButton.style.display = "none";
+
+    document.getElementById("answer").disabled = false;
+
+    document.getElementById("answer").value = "";
+
+    generateCaptcha();
+
+}
+
+
+window.onload = function() {
+
+    generateCaptcha();
+
+};
+
+</script>
+
+</body>
+</html>
