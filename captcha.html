@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAPTCHA Verification</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f1f5f9;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .captcha-box {
+      width: 100%;
+      max-width: 390px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.12);
+      text-align: center;
+    }
+
+    h2 {
+      color: #1565c0;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .captcha-code {
+      position: relative;
+      min-height: 85px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e2e8f0;
+      border: 2px dashed #94a3b8;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    #codeText {
+      display: block;
+      color: #1565c0;
+      font-size: 30px;
+      font-weight: bold;
+      letter-spacing: 8px;
+      font-style: italic;
+      user-select: none;
+      padding-right: 40px;
+    }
+
+    .refresh {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      border: none;
+      background: white;
+      color: #1565c0;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    #captchaInput {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      font-size: 16px;
+      text-align: center;
+      outline: none;
+      margin-bottom: 12px;
+    }
+
+    #captchaInput:focus {
+      border-color: #2563eb;
+    }
+
+    .verify {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 9px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .verify:hover {
+      background: #1d4ed8;
+    }
+
+    #message {
+      margin-top: 15px;
+      font-size: 14px;
+      font-weight: bold;
+      min-height: 20px;
+    }
+
+    .success {
+      color: #16a34a;
+    }
+
+    .error {
+      color: #dc2626;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="captcha-box">
+
+    <h2>CAPTCHA যাচাই</h2>
+
+    <p class="subtitle">
+      নিচের কোডটি দেখে ঘরে লিখুন
+    </p>
+
+    <div class="captcha-code">
+
+      <span id="codeText">------</span>
+
+      <button
+        type="button"
+        class="refresh"
+        id="refreshButton"
+        title="নতুন কোড">
+        ↻
+      </button>
+
+    </div>
+
+    <input
+      type="text"
+      id="captchaInput"
+      placeholder="CAPTCHA কোড লিখুন"
+      autocomplete="off"
+      autocapitalize="characters"
+      spellcheck="false"
+    >
+
+    <button
+      type="button"
+      class="verify"
+      id="verifyButton">
+      যাচাই করুন
+    </button>
+
+    <div id="message"></div>
+
+  </div>
+
+  <script>
+    let captcha = "";
+
+    const characters =
+      "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    function generateCaptcha() {
+
+      captcha = "";
+
+      for (let i = 0; i < 6; i++) {
+
+        const randomIndex =
+          Math.floor(Math.random() * characters.length);
+
+        captcha += characters[randomIndex];
+      }
+
+      document.getElementById("codeText").textContent = captcha;
+
+      document.getElementById("captchaInput").value = "";
+
+      document.getElementById("message").textContent = "";
+
+      document.getElementById("message").className = "";
+    }
+
+    function verifyCaptcha() {
+
+      const input =
+        document.getElementById("captchaInput")
+          .value
+          .trim()
+          .toUpperCase();
+
+      const message =
+        document.getElementById("message");
+
+      if (input === "") {
+
+        message.textContent =
+          "⚠️ আগে CAPTCHA কোড লিখুন।";
+
+        message.className = "error";
+
+        return;
+      }
+
+      if (input === captcha) {
+
+        message.textContent =
+          "✅ CAPTCHA সঠিক হয়েছে!";
+
+        message.className = "success";
+
+      } else {
+
+        message.textContent =
+          "❌ CAPTCHA ভুল হয়েছে। নতুন কোড দেওয়া হলো।";
+
+        message.className = "error";
+
+        setTimeout(generateCaptcha, 500);
+      }
+    }
+
+    document
+      .getElementById("refreshButton")
+      .addEventListener("click", generateCaptcha);
+
+    document
+      .getElementById("verifyButton")
+      .addEventListener("click", verifyCaptcha);
+
+    document
+      .getElementById("captchaInput")
+      .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+          verifyCaptcha();
+        }
+
+      });
+
+    // পেজ চালু হলেই CAPTCHA তৈরি হবে
+    generateCaptcha();
+  </script>
+
+</body>
+</html>
