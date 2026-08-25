@@ -1,1 +1,663 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Bangla Earn Hub</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#eef4ff;
+  font-family:Arial,sans-serif;
+  color:#222;
+}
+
+.header{
+  background:#1976d2;
+  color:white;
+  text-align:center;
+  padding:40px 20px;
+}
+
+.header h1{
+  margin:0;
+  font-size:38px;
+}
+
+.header p{
+  font-size:19px;
+  line-height:1.6;
+}
+
+.container{
+  width:94%;
+  max-width:900px;
+  margin:25px auto;
+}
+
+.card{
+  background:white;
+  border-radius:20px;
+  padding:30px 22px;
+  margin-bottom:22px;
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+  text-align:center;
+}
+
+.card h2{
+  color:#1565c0;
+  font-size:28px;
+  margin-top:0;
+}
+
+.card p{
+  font-size:18px;
+  line-height:1.7;
+}
+
+/* CAPTCHA */
+
+.captcha-box{
+  position:relative;
+  min-height:110px;
+  margin:20px 0;
+  padding:15px 60px 15px 15px;
+  border:2px dashed #90a4ae;
+  border-radius:15px;
+  background:#eef5fc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+#captchaCode{
+  color:#1565c0;
+  font-size:34px;
+  font-weight:bold;
+  font-style:italic;
+  letter-spacing:8px;
+  user-select:none;
+}
+
+.refresh{
+  position:absolute;
+  right:10px;
+  top:10px;
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:50%;
+  background:white;
+  color:#1565c0;
+  font-size:25px;
+  cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+
+.refresh:active{
+  transform:rotate(180deg);
+}
+
+.captcha-input{
+  width:100%;
+  padding:16px;
+  border:2px solid #cbd5e1;
+  border-radius:12px;
+  font-size:20px;
+  text-align:center;
+  outline:none;
+  margin-bottom:12px;
+  user-select:text;
+  -webkit-user-select:text;
+}
+
+.captcha-input:focus{
+  border-color:#1976d2;
+}
+
+.btn{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:16px;
+  color:white;
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:8px;
+}
+
+.submit-btn{
+  background:#1976d2;
+}
+
+.task-btn{
+  background:#198754;
+}
+
+.task-btn:disabled{
+  background:#94a3b8;
+  cursor:not-allowed;
+}
+
+#captchaMessage{
+  min-height:28px;
+  font-size:17px;
+  font-weight:bold;
+  margin:10px 0;
+}
+
+.success{
+  color:#16a34a;
+}
+
+.error{
+  color:#dc2626;
+}
+
+#taskBox{
+  display:none;
+  margin-top:20px;
+  padding:20px;
+  border-radius:15px;
+  background:#f0fdf4;
+  border:2px solid #86efac;
+}
+
+#taskBox h3{
+  color:#15803d;
+}
+
+/* SOCIAL */
+
+.social-btn{
+  display:block;
+  width:100%;
+  text-decoration:none;
+  color:white;
+  padding:16px;
+  border-radius:12px;
+  font-size:19px;
+  font-weight:bold;
+  margin-top:12px;
+}
+
+.youtube{
+  background:#ff0000;
+}
+
+.facebook{
+  background:#1877f2;
+}
+
+.telegram{
+  background:#229ed9;
+}
+
+/* PAYMENT */
+
+.payment-number{
+  font-size:24px;
+  font-weight:bold;
+  color:#1565c0;
+  margin:18px 0;
+}
+
+.warning{
+  border-left:6px solid #1976d2;
+  text-align:left;
+}
+
+footer{
+  background:#1976d2;
+  color:white;
+  text-align:center;
+  padding:30px 20px;
+  font-size:17px;
+  line-height:1.8;
+}
+
+@media(max-width:600px){
+
+  .header h1{
+    font-size:32px;
+  }
+
+  .header p{
+    font-size:17px;
+  }
+
+  .card{
+    padding:25px 18px;
+  }
+
+  #captchaCode{
+    font-size:27px;
+    letter-spacing:5px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <h1>Bangla Earn Hub</h1>
+  <p>
+    অনলাইনে কাজ করুন এবং নিয়ম মেনে আয় করার সুযোগ পান
+  </p>
+</header>
+
+<main class="container">
+
+<section class="card">
+
+  <h2>Bangla Earn Hub-এ স্বাগতম</h2>
+
+  <p>
+    আমাদের প্ল্যাটফর্মে বিভিন্ন অনলাইন কাজের
+    তথ্য ও নির্দেশনা দেওয়া হবে।
+  </p>
+
+  <p>
+    কাজ শুরু করার আগে প্রতিটি কাজের নিয়ম ও
+    শর্ত ভালোভাবে পড়ে নিন।
+  </p>
+
+</section>
+
+
+<!-- CAPTCHA -->
+
+<section class="card">
+
+  <h2>CAPTCHA Work</h2>
+
+  <p>
+    নিচের CAPTCHA কোডটি দেখে একই কোড লিখে Submit করুন।
+  </p>
+
+  <div class="captcha-box">
+
+    <span id="captchaCode">------</span>
+
+    <button
+      type="button"
+      class="refresh"
+      id="refreshBtn">
+      ↻
+    </button>
+
+  </div>
+
+  <input
+    type="text"
+    id="captchaInput"
+    class="captcha-input"
+    placeholder="CAPTCHA কোড লিখুন"
+    autocomplete="off"
+    autocapitalize="characters"
+    spellcheck="false">
+
+  <div id="captchaMessage"></div>
+
+  <button
+    type="button"
+    class="btn submit-btn"
+    id="submitBtn">
+    Submit
+  </button>
+
+  <button
+    type="button"
+    class="btn task-btn"
+    id="startTaskBtn"
+    disabled>
+    Start Task
+  </button>
+
+  <div id="taskBox">
+
+    <h3>✅ Task শুরু হয়েছে</h3>
+
+    <p>
+      আপনার জন্য বর্তমানে কোনো নির্দিষ্ট Task যোগ করা হয়নি।
+    </p>
+
+    <p>
+      নতুন Task যোগ হলে এখানে দেখানো হবে।
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- YOUTUBE -->
+
+<section class="card">
+
+  <h2>YouTube</h2>
+
+  <p>
+    YouTube চ্যানেলে গিয়ে নতুন ভিডিও ও আপডেট দেখতে পারেন।
+  </p>
+
+  <a
+    href="https://www.youtube.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="social-btn youtube">
+    ▶ Watch YouTube
+  </a>
+
+</section>
+
+
+<!-- FACEBOOK -->
+
+<section class="card">
+
+  <h2>Facebook</h2>
+
+  <p>
+    Facebook পেজে যুক্ত হয়ে সর্বশেষ আপডেট দেখুন।
+  </p>
+
+  <a
+    href="https://www.facebook.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="social-btn facebook">
+    Facebook
+  </a>
+
+</section>
+
+
+<!-- TELEGRAM -->
+
+<section class="card">
+
+  <h2>Telegram</h2>
+
+  <p>
+    নতুন কাজ ও আপডেটের খবর পেতে Telegram-এ যুক্ত হতে পারেন।
+  </p>
+
+  <a
+    href="https://t.me/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="social-btn telegram">
+    ✈️ Join Telegram
+  </a>
+
+</section>
+
+
+<!-- PAYMENT -->
+
+<section class="card">
+
+  <h2>Payment</h2>
+
+  <p>
+    বর্তমানে পেমেন্টের জন্য:
+  </p>
+
+  <div class="payment-number">
+    bKash / Nagad
+  </div>
+
+  <p>
+    Payment number:
+    <strong>01336653636</strong>
+  </p>
+
+  <p>
+    টাকা পাঠানো বা উত্তোলনের আগে নিয়ম,
+    শর্ত ও ফি ভালোভাবে যাচাই করুন।
+  </p>
+
+</section>
+
+
+<!-- WARNING -->
+
+<section class="card warning">
+
+  <h2>Important Warning</h2>
+
+  <p>
+    কোনো কাজের জন্য টাকা দেওয়ার আগে কাজের নিয়ম,
+    পারিশ্রমিক এবং উত্তোলনের শর্ত ভালোভাবে যাচাই করুন।
+  </p>
+
+  <p>
+    ভুল তথ্য বা সন্দেহজনক অফার থেকে সতর্ক থাকুন।
+  </p>
+
+</section>
+
+
+<!-- SOCIAL -->
+
+<section class="card">
+
+  <h2>Stay Connected With Us</h2>
+
+  <a
+    href="https://www.facebook.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="social-btn facebook">
+    Facebook
+  </a>
+
+  <a
+    href="https://www.youtube.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="social-btn youtube">
+    YouTube
+  </a>
+
+  <a
+    href="https://t.me/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="social-btn telegram">
+    Telegram
+  </a>
+
+</section>
+
+</main>
+
+
+<footer>
+  © 2026 Bangla Earn Hub<br>
+  All rights reserved.
+</footer>
+
+
+<script>
+
+"use strict";
+
+/* CAPTCHA */
+
+let captcha = "";
+
+const characters =
+"ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+const captchaCode =
+document.getElementById("captchaCode");
+
+const captchaInput =
+document.getElementById("captchaInput");
+
+const captchaMessage =
+document.getElementById("captchaMessage");
+
+const refreshBtn =
+document.getElementById("refreshBtn");
+
+const submitBtn =
+document.getElementById("submitBtn");
+
+const startTaskBtn =
+document.getElementById("startTaskBtn");
+
+const taskBox =
+document.getElementById("taskBox");
+
+
+/* নতুন CAPTCHA */
+
+function generateCaptcha(){
+
+  captcha = "";
+
+  for(let i = 0; i < 6; i++){
+
+    const randomIndex =
+      Math.floor(
+        Math.random() * characters.length
+      );
+
+    captcha += characters[randomIndex];
+
+  }
+
+  captchaCode.textContent = captcha;
+
+  captchaInput.value = "";
+
+  captchaMessage.textContent = "";
+
+  captchaMessage.className = "";
+
+  startTaskBtn.disabled = true;
+
+  taskBox.style.display = "none";
+
+}
+
+
+/* CAPTCHA যাচাই */
+
+function verifyCaptcha(){
+
+  const userInput =
+    captchaInput.value
+      .trim()
+      .toUpperCase();
+
+  if(userInput === ""){
+
+    captchaMessage.textContent =
+      "⚠️ আগে CAPTCHA কোড লিখুন।";
+
+    captchaMessage.className = "error";
+
+    return;
+
+  }
+
+  if(userInput === captcha){
+
+    captchaMessage.textContent =
+      "✅ CAPTCHA সঠিক হয়েছে!";
+
+    captchaMessage.className = "success";
+
+    startTaskBtn.disabled = false;
+
+    return;
+
+  }
+
+  captchaMessage.textContent =
+    "❌ CAPTCHA ভুল হয়েছে। আবার চেষ্টা করুন।";
+
+  captchaMessage.className = "error";
+
+  startTaskBtn.disabled = true;
+
+}
+
+
+/* Refresh button */
+
+refreshBtn.addEventListener(
+  "click",
+  generateCaptcha
+);
+
+
+/* Submit button */
+
+submitBtn.addEventListener(
+  "click",
+  verifyCaptcha
+);
+
+
+/* Enter key */
+
+captchaInput.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Enter"){
+
+      event.preventDefault();
+
+      verifyCaptcha();
+
+    }
+
+  }
+);
+
+
+/* Start Task */
+
+startTaskBtn.addEventListener(
+  "click",
+  function(){
+
+    if(startTaskBtn.disabled){
+      return;
+    }
+
+    taskBox.style.display = "block";
+
+    taskBox.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+  }
+);
+
+
+/* প্রথমবার CAPTCHA তৈরি */
+
+generateCaptcha();
+
+</script>
+
+</body>
+  </html>
