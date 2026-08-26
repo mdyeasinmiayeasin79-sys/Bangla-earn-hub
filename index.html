@@ -1,1 +1,649 @@
 
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bangla Earn Hub</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:#050505;
+  color:#fff;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+}
+
+.app{
+  width:100%;
+  max-width:480px;
+  min-height:100vh;
+  margin:auto;
+  background:#111;
+  padding-bottom:100px;
+}
+
+/* HEADER */
+.header{
+  padding:16px 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.balance{
+  border:2px solid #704cff;
+  background:#292929;
+  border-radius:30px;
+  padding:10px 16px;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.earn{
+  background:#303030;
+  border-radius:25px;
+  padding:10px 13px;
+  font-size:14px;
+}
+
+.earn b{
+  color:#8b70ff;
+}
+
+/* NOTICE */
+.notice{
+  margin:4px 12px 12px;
+  background:#242424;
+  border-radius:20px;
+  padding:12px;
+  text-align:center;
+  font-size:16px;
+}
+
+/* VIDEO AREA */
+.video-box{
+  position:relative;
+  width:100%;
+  background:#000;
+  overflow:hidden;
+}
+
+.video-box video{
+  display:block;
+  width:100%;
+  height:430px;
+  object-fit:cover;
+  background:#000;
+}
+
+/* TASK COUNTER */
+.counter{
+  position:absolute;
+  top:15px;
+  right:15px;
+  text-align:center;
+  z-index:5;
+}
+
+.money-icon{
+  width:62px;
+  height:62px;
+  border:4px solid #ffe68a;
+  border-radius:50%;
+  background:#171717;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+}
+
+.count{
+  margin-top:5px;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.follow{
+  margin-top:15px;
+  color:#ff4d7d;
+  font-size:29px;
+}
+
+.follow-text{
+  font-size:14px;
+}
+
+/* VIDEO TEXT */
+.video-title{
+  text-align:center;
+  padding:18px 10px;
+  background:#111;
+}
+
+.video-title h2{
+  font-size:23px;
+  line-height:1.5;
+}
+
+/* TIMER */
+.timer-box{
+  display:none;
+  margin:15px;
+  padding:15px;
+  border-radius:15px;
+  background:#242424;
+  text-align:center;
+}
+
+.timer{
+  color:#9a82ff;
+  font-size:30px;
+  font-weight:bold;
+}
+
+.message{
+  margin-top:6px;
+  color:#ccc;
+  font-size:14px;
+}
+
+/* BUTTON */
+.action{
+  width:calc(100% - 30px);
+  margin:5px 15px;
+  padding:15px;
+  border:0;
+  border-radius:15px;
+  background:#704cff;
+  color:#fff;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.action:disabled{
+  opacity:.5;
+}
+
+/* RESET */
+.reset{
+  display:block;
+  margin:12px auto;
+  border:0;
+  background:transparent;
+  color:#777;
+  font-size:12px;
+}
+
+/* BOTTOM NAV */
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:480px;
+  height:78px;
+  background:#050505;
+  border-top:1px solid #333;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  z-index:50;
+}
+
+.nav{
+  text-align:center;
+  color:#999;
+  font-size:13px;
+}
+
+.nav-icon{
+  font-size:25px;
+  margin-bottom:4px;
+}
+
+.nav.active{
+  color:#7650ff;
+}
+
+@media(max-width:360px){
+
+  .balance{
+    font-size:18px;
+    padding:9px 12px;
+  }
+
+  .earn{
+    font-size:12px;
+  }
+
+  .video-box video{
+    height:370px;
+  }
+
+  .video-title h2{
+    font-size:20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+
+    <div class="balance">
+      💵 ৳ <span id="balance">0.00</span>
+    </div>
+
+    <div class="earn">
+      আরও <b>আয় করুন</b>
+    </div>
+
+  </div>
+
+
+  <!-- NOTICE -->
+  <div class="notice">
+    🔔 অভিনন্দন! নতুন ভিডিও টাস্ক এসেছে
+  </div>
+
+
+  <!-- VIDEO -->
+  <div class="video-box">
+
+    <video
+      id="video"
+      controls
+      playsinline
+      preload="metadata">
+
+      <source src="video.mp4" type="video/mp4">
+
+      আপনার ব্রাউজার ভিডিও চালাতে পারে না।
+    </video>
+
+
+    <!-- COUNTER -->
+    <div class="counter">
+
+      <div class="money-icon">
+        💵
+      </div>
+
+      <div class="count">
+        <span id="completed">0</span>/3
+      </div>
+
+      <div class="follow">
+        ♥
+      </div>
+
+      <div class="follow-text">
+        ফলো
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TITLE -->
+  <div class="video-title">
+
+    <h2>
+      🎬 ভিডিও দেখুন<br>
+      এবং বৈধভাবে আয় করুন
+    </h2>
+
+  </div>
+
+
+  <!-- TIMER -->
+  <div
+    class="timer-box"
+    id="timerBox">
+
+    <div class="timer">
+      <span id="timer">10</span> সেকেন্ড
+    </div>
+
+    <div
+      class="message"
+      id="message">
+
+      ভিডিও চালু করুন
+    </div>
+
+  </div>
+
+
+  <!-- BUTTON -->
+  <button
+    class="action"
+    id="taskButton"
+    onclick="startTask()">
+
+    🎬 টাস্ক শুরু করুন
+
+  </button>
+
+
+  <button
+    class="reset"
+    onclick="resetTasks()">
+
+    টাস্ক রিসেট
+
+  </button>
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+<div class="bottom">
+
+  <div class="nav active">
+    <div class="nav-icon">▤</div>
+    এক্সপ্লোর
+  </div>
+
+  <div class="nav">
+    <div class="nav-icon">🔎</div>
+    শর্টস
+  </div>
+
+  <div class="nav">
+    <div class="nav-icon">💵</div>
+    পুরস্কার
+  </div>
+
+  <div class="nav">
+    <div class="nav-icon">♡</div>
+    প্রিয়
+  </div>
+
+  <div class="nav">
+    <div class="nav-icon">♙</div>
+    প্রোফাইল
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   DATA
+========================= */
+
+let balance =
+  Number(localStorage.getItem("balance")) || 0;
+
+let completed =
+  Number(localStorage.getItem("completed")) || 0;
+
+let running = false;
+
+
+/* =========================
+   DISPLAY
+========================= */
+
+function updateDisplay(){
+
+  document.getElementById("balance").innerText =
+    balance.toFixed(2);
+
+  document.getElementById("completed").innerText =
+    completed;
+
+}
+
+
+/* =========================
+   START TASK
+========================= */
+
+function startTask(){
+
+  if(running){
+    return;
+  }
+
+  if(completed >= 3){
+
+    alert(
+      "আজকের ৩টি টাস্ক সম্পূর্ণ হয়েছে।"
+    );
+
+    return;
+  }
+
+  const video =
+    document.getElementById("video");
+
+  /*
+    ভিডিও না চললে টাস্ক শুরু হবে না
+  */
+
+  if(video.paused){
+
+    alert(
+      "প্রথমে ভিডিওটি Play করুন।"
+    );
+
+    video.play().catch(function(){
+
+      alert(
+        "ভিডিও চালু করা যাচ্ছে না। ভিডিও ফাইলটি ঠিক আছে কিনা দেখুন।"
+      );
+
+    });
+
+    return;
+  }
+
+  running = true;
+
+  const button =
+    document.getElementById("taskButton");
+
+  const timerBox =
+    document.getElementById("timerBox");
+
+  const timer =
+    document.getElementById("timer");
+
+  const message =
+    document.getElementById("message");
+
+  timerBox.style.display = "block";
+
+  button.disabled = true;
+
+  button.innerText =
+    "⏳ টাস্ক চলছে...";
+
+  message.innerText =
+    "ভিডিও চালু রাখুন...";
+
+  let time = 10;
+
+  timer.innerText = time;
+
+
+  const interval =
+    setInterval(function(){
+
+      /*
+        ভিডিও বন্ধ করলে কাউন্টডাউন থামবে
+      */
+
+      if(video.paused){
+
+        clearInterval(interval);
+
+        running = false;
+
+        button.disabled = false;
+
+        button.innerText =
+          "🎬 আবার টাস্ক শুরু করুন";
+
+        message.innerText =
+          "ভিডিও বন্ধ হয়েছে। আবার Play করুন।";
+
+        return;
+      }
+
+
+      time--;
+
+      timer.innerText = time;
+
+
+      if(time <= 0){
+
+        clearInterval(interval);
+
+        finishTask();
+
+      }
+
+    },1000);
+
+}
+
+
+/* =========================
+   FINISH TASK
+========================= */
+
+function finishTask(){
+
+  const video =
+    document.getElementById("video");
+
+  video.pause();
+
+  completed++;
+
+  balance += 1;
+
+
+  localStorage.setItem(
+    "balance",
+    balance
+  );
+
+  localStorage.setItem(
+    "completed",
+    completed
+  );
+
+
+  updateDisplay();
+
+
+  document.getElementById("timerBox")
+    .style.display = "none";
+
+
+  const button =
+    document.getElementById("taskButton");
+
+
+  if(completed >= 3){
+
+    button.disabled = true;
+
+    button.innerText =
+      "✅ আজকের ৩টি টাস্ক শেষ";
+
+    alert(
+      "অভিনন্দন! 🎉\n\n" +
+      "৩টি টাস্ক সম্পূর্ণ হয়েছে।\n" +
+      "ডেমো রিওয়ার্ড: ৳3.00"
+    );
+
+  }
+
+  else{
+
+    button.disabled = false;
+
+    button.innerText =
+      "🎬 পরের টাস্ক শুরু করুন";
+
+    alert(
+      "টাস্ক সম্পূর্ণ হয়েছে! 🎉\n\n" +
+      "আপনার ব্যালেন্সে ৳1.00 যোগ হয়েছে।"
+    );
+
+  }
+
+
+  running = false;
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetTasks(){
+
+  if(
+    confirm(
+      "টাস্ক কাউন্টার 0/3 করতে চান?"
+    )
+  ){
+
+    completed = 0;
+
+    localStorage.setItem(
+      "completed",
+      0
+    );
+
+    updateDisplay();
+
+    const button =
+      document.getElementById("taskButton");
+
+    button.disabled = false;
+
+    button.innerText =
+      "🎬 টাস্ক শুরু করুন";
+
+    alert(
+      "টাস্ক কাউন্টার রিসেট হয়েছে।"
+    );
+  }
+
+}
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+updateDisplay();
+
+</script>
+
+</body>
+    </html>
