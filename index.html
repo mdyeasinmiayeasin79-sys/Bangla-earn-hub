@@ -1,1 +1,679 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Bangla Earn Hub</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#070707;
+    color:white;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+}
+
+.container{
+    width:100%;
+    max-width:480px;
+    margin:auto;
+    min-height:100vh;
+    background:#111;
+    padding-bottom:30px;
+}
+
+/* Header */
+.header{
+    background:linear-gradient(135deg,#00c853,#009624);
+    padding:25px 20px;
+    text-align:center;
+}
+
+.header h1{
+    font-size:25px;
+    margin-bottom:7px;
+}
+
+.header p{
+    font-size:14px;
+}
+
+/* Balance */
+.balance{
+    margin:18px;
+    padding:22px;
+    border-radius:16px;
+    background:linear-gradient(135deg,#202020,#151515);
+    text-align:center;
+    border:1px solid #292929;
+}
+
+.balance small{
+    color:#aaa;
+}
+
+.money{
+    font-size:36px;
+    font-weight:bold;
+    color:#00e676;
+    margin-top:6px;
+}
+
+/* Menu */
+.menu{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    padding:0 18px;
+}
+
+.menu button{
+    border:none;
+    padding:14px 5px;
+    border-radius:12px;
+    background:#202020;
+    color:white;
+    font-size:15px;
+}
+
+/* Section */
+.section{
+    padding:20px 18px 0;
+}
+
+.section h2{
+    font-size:20px;
+    margin-bottom:13px;
+}
+
+/* Task */
+.task{
+    background:#1b1b1b;
+    border:1px solid #292929;
+    padding:17px;
+    border-radius:15px;
+    margin-bottom:12px;
+}
+
+.task-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.task h3{
+    font-size:17px;
+}
+
+.reward{
+    color:#00e676;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.task p{
+    color:#aaa;
+    font-size:13px;
+    margin:9px 0 13px;
+}
+
+.task button{
+    width:100%;
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    background:#00c853;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+}
+
+.task button:active{
+    transform:scale(.98);
+}
+
+.disabled{
+    background:#444 !important;
+}
+
+/* History */
+.history{
+    background:#181818;
+    padding:15px;
+    border-radius:14px;
+}
+
+.history p{
+    padding:9px 0;
+    border-bottom:1px solid #292929;
+    font-size:14px;
+}
+
+.history p:last-child{
+    border-bottom:none;
+}
+
+.empty{
+    color:#777;
+    text-align:center;
+}
+
+/* Withdraw */
+.withdraw{
+    margin:18px;
+    padding:18px;
+    border-radius:15px;
+    background:#191919;
+}
+
+.withdraw input,
+.withdraw select{
+    width:100%;
+    margin-top:10px;
+    padding:13px;
+    border-radius:9px;
+    border:1px solid #333;
+    background:#0d0d0d;
+    color:white;
+}
+
+.withdraw button{
+    width:100%;
+    margin-top:12px;
+    padding:13px;
+    border:none;
+    border-radius:9px;
+    background:#2979ff;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+}
+
+/* Notice */
+.notice{
+    margin:18px;
+    padding:14px;
+    background:#211d08;
+    border:1px solid #4b410d;
+    border-radius:12px;
+    color:#ffe082;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* Footer */
+.footer{
+    text-align:center;
+    color:#666;
+    font-size:12px;
+    padding:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>💰 Bangla Earn Hub</h1>
+        <p>ছোট ছোট কাজ করে রিওয়ার্ড সংগ্রহ করুন</p>
+    </div>
+
+    <div class="balance">
+        <small>আপনার বর্তমান ব্যালেন্স</small>
+        <div class="money">
+            ৳ <span id="balance">0.00</span>
+        </div>
+    </div>
+
+    <div class="menu">
+        <button onclick="showTasks()">📋 টাস্ক</button>
+        <button onclick="showWithdraw()">💳 উত্তোলন</button>
+    </div>
+
+    <div class="section" id="tasks">
+
+        <h2>🔥 Available Tasks</h2>
+
+        <!-- Video Task -->
+        <div class="task">
+            <div class="task-top">
+                <h3>🎬 ভিডিও দেখুন</h3>
+                <span class="reward">৳ 5</span>
+            </div>
+
+            <p>
+                ভিডিও টাস্ক সম্পন্ন করলে ৫ টাকা রিওয়ার্ড।
+            </p>
+
+            <button id="videoBtn" onclick="completeVideo()">
+                ভিডিও দেখুন
+            </button>
+        </div>
+
+        <!-- Website Task -->
+        <div class="task">
+            <div class="task-top">
+                <h3>🌐 ওয়েবসাইট ভিজিট</h3>
+                <span class="reward">৳ 3</span>
+            </div>
+
+            <p>
+                নির্দিষ্ট ওয়েবসাইট ভিজিট করলে ৩ টাকা রিওয়ার্ড।
+            </p>
+
+            <button id="siteBtn" onclick="completeWebsite()">
+                ওয়েবসাইট ভিজিট
+            </button>
+        </div>
+
+        <!-- Daily Task -->
+        <div class="task">
+            <div class="task-top">
+                <h3>📅 Daily Bonus</h3>
+                <span class="reward">৳ 2</span>
+            </div>
+
+            <p>
+                প্রতিদিনের বোনাস একবার সংগ্রহ করুন।
+            </p>
+
+            <button id="dailyBtn" onclick="dailyBonus()">
+                বোনাস নিন
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Withdraw -->
+    <div class="withdraw" id="withdraw" style="display:none;">
+
+        <h2>💳 টাকা উত্তোলন</h2>
+
+        <select id="method">
+            <option value="bKash">bKash</option>
+            <option value="Nagad">Nagad</option>
+            <option value="Rocket">Rocket</option>
+        </select>
+
+        <input
+            type="text"
+            id="number"
+            placeholder="আপনার মোবাইল নম্বর"
+        >
+
+        <input
+            type="number"
+            id="amount"
+            placeholder="কত টাকা তুলবেন?"
+        >
+
+        <button onclick="withdrawMoney()">
+            উত্তোলনের আবেদন করুন
+        </button>
+
+    </div>
+
+    <div class="section">
+
+        <h2>📜 কাজের হিস্টোরি</h2>
+
+        <div class="history" id="history">
+            <p class="empty">এখনো কোনো কাজ করা হয়নি</p>
+        </div>
+
+    </div>
+
+    <div class="notice">
+        ℹ️ মনে রাখবেন: এই ডেমো ওয়েবসাইটে ব্যালেন্স আপনার ব্রাউজারে
+        সংরক্ষণ করা হয়। আসল টাকা প্রদান করতে হলে পরে একটি
+        সার্ভার/ডাটাবেজ এবং পেমেন্ট সিস্টেম যুক্ত করতে হবে।
+    </div>
+
+    <div class="footer">
+        © 2026 Bangla Earn Hub
+    </div>
+
+</div>
+
+<script>
+
+/* =========================
+   BALANCE SYSTEM
+========================= */
+
+let balance = parseFloat(
+    localStorage.getItem("balance") || "0"
+);
+
+let history =
+    JSON.parse(localStorage.getItem("history") || "[]");
+
+document.getElementById("balance").innerText =
+    balance.toFixed(2);
+
+
+/* =========================
+   SHOW BALANCE
+========================= */
+
+function updateBalance(){
+
+    document.getElementById("balance").innerText =
+        balance.toFixed(2);
+
+    localStorage.setItem(
+        "balance",
+        balance.toString()
+    );
+}
+
+
+/* =========================
+   ADD HISTORY
+========================= */
+
+function addHistory(text, amount){
+
+    history.unshift({
+        text:text,
+        amount:amount,
+        time:new Date().toLocaleString("bn-BD")
+    });
+
+    localStorage.setItem(
+        "history",
+        JSON.stringify(history)
+    );
+
+    renderHistory();
+}
+
+
+/* =========================
+   HISTORY DISPLAY
+========================= */
+
+function renderHistory(){
+
+    let box =
+        document.getElementById("history");
+
+    if(history.length === 0){
+
+        box.innerHTML =
+            '<p class="empty">এখনো কোনো কাজ করা হয়নি</p>';
+
+        return;
+    }
+
+    box.innerHTML = "";
+
+    history.slice(0,10).forEach(item => {
+
+        let p =
+            document.createElement("p");
+
+        p.innerHTML =
+            "✅ " +
+            item.text +
+            " — <b style='color:#00e676'>৳ " +
+            item.amount +
+            "</b><br>" +
+            "<small style='color:#666'>" +
+            item.time +
+            "</small>";
+
+        box.appendChild(p);
+
+    });
+}
+
+renderHistory();
+
+
+/* =========================
+   VIDEO TASK
+========================= */
+
+function completeVideo(){
+
+    let btn =
+        document.getElementById("videoBtn");
+
+    if(btn.disabled){
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerText = "⏳ কাজ চলছে...";
+
+    setTimeout(function(){
+
+        balance += 5;
+
+        updateBalance();
+
+        addHistory(
+            "ভিডিও টাস্ক সম্পন্ন",
+            5
+        );
+
+        btn.innerText =
+            "✅ সম্পন্ন হয়েছে";
+
+        btn.classList.add("disabled");
+
+        alert("অভিনন্দন! ভিডিও টাস্কের জন্য ৳৫ যোগ হয়েছে।");
+
+    },3000);
+}
+
+
+/* =========================
+   WEBSITE TASK
+========================= */
+
+function completeWebsite(){
+
+    let btn =
+        document.getElementById("siteBtn");
+
+    if(btn.disabled){
+        return;
+    }
+
+    /*
+      এখানে পরে আসল ওয়েবসাইটের URL বসানো যাবে।
+      এখন ডেমো হিসেবে ৩ সেকেন্ড অপেক্ষা করছে।
+    */
+
+    window.open(
+        "https://example.com",
+        "_blank"
+    );
+
+    btn.disabled = true;
+    btn.innerText = "⏳ যাচাই হচ্ছে...";
+
+    setTimeout(function(){
+
+        balance += 3;
+
+        updateBalance();
+
+        addHistory(
+            "ওয়েবসাইট ভিজিট",
+            3
+        );
+
+        btn.innerText =
+            "✅ সম্পন্ন হয়েছে";
+
+        btn.classList.add("disabled");
+
+        alert("অভিনন্দন! ওয়েবসাইট ভিজিটের জন্য ৳৩ যোগ হয়েছে।");
+
+    },3000);
+}
+
+
+/* =========================
+   DAILY BONUS
+========================= */
+
+function dailyBonus(){
+
+    let today =
+        new Date().toDateString();
+
+    let last =
+        localStorage.getItem("dailyBonus");
+
+    if(last === today){
+
+        alert(
+            "আজকের Daily Bonus ইতিমধ্যে নেওয়া হয়েছে।"
+        );
+
+        return;
+    }
+
+    balance += 2;
+
+    localStorage.setItem(
+        "dailyBonus",
+        today
+    );
+
+    updateBalance();
+
+    addHistory(
+        "Daily Bonus",
+        2
+    );
+
+    document.getElementById("dailyBtn").innerText =
+        "✅ আজ নেওয়া হয়েছে";
+
+    document.getElementById("dailyBtn").classList.add(
+        "disabled"
+    );
+
+    alert(
+        "🎉 Daily Bonus হিসেবে ৳২ যোগ হয়েছে!"
+    );
+}
+
+
+/* =========================
+   WITHDRAW
+========================= */
+
+function withdrawMoney(){
+
+    let method =
+        document.getElementById("method").value;
+
+    let number =
+        document.getElementById("number").value.trim();
+
+    let amount =
+        parseFloat(
+            document.getElementById("amount").value
+        );
+
+    if(number === ""){
+
+        alert("মোবাইল নম্বর দিন।");
+        return;
+    }
+
+    if(!amount || amount <= 0){
+
+        alert("সঠিক টাকার পরিমাণ দিন।");
+        return;
+    }
+
+    if(amount > balance){
+
+        alert(
+            "আপনার ব্যালেন্স পর্যাপ্ত নয়।"
+        );
+
+        return;
+    }
+
+    balance -= amount;
+
+    updateBalance();
+
+    addHistory(
+        "Withdraw (" + method + ")",
+        "-" + amount
+    );
+
+    alert(
+        "উত্তোলনের আবেদন গ্রহণ করা হয়েছে।\n" +
+        "মাধ্যম: " + method +
+        "\nনম্বর: " + number +
+        "\nপরিমাণ: ৳" + amount
+    );
+
+    document.getElementById("number").value="";
+    document.getElementById("amount").value="";
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+function showTasks(){
+
+    document.getElementById("tasks")
+        .style.display = "block";
+
+    document.getElementById("withdraw")
+        .style.display = "none";
+}
+
+
+function showWithdraw(){
+
+    document.getElementById("tasks")
+        .style.display = "none";
+
+    document.getElementById("withdraw")
+        .style.display = "block";
+}
+
+
+/* =========================
+   PREVENT DAILY REUSE UI
+========================= */
+
+let today =
+    new Date().toDateString();
+
+if(localStorage.getItem("dailyBonus") === today){
+
+    document.getElementById("dailyBtn").innerText =
+        "✅ আজ নেওয়া হয়েছে";
+
+    document.getElementById("dailyBtn").classList.add(
+        "disabled"
+    );
+}
+
+</script>
+
+</body>
+              </html>
